@@ -1,50 +1,60 @@
-# [PROJECT_NAME] Constitution
-<!-- Example: Spec Constitution, TaskFlow Constitution, etc. -->
+# aio2026-practice Constitution
+
+Hiến chương dự án cho repo thực hành AIO 2026 & project AIO Conquer 2026.
+Tài liệu này là **nguồn sự thật về nguyên tắc** — mọi spec, plan, task và code phải tuân theo.
 
 ## Core Principles
 
-### [PRINCIPLE_1_NAME]
-<!-- Example: I. Library-First -->
-[PRINCIPLE_1_DESCRIPTION]
-<!-- Example: Every feature starts as a standalone library; Libraries must be self-contained, independently testable, documented; Clear purpose required - no organizational-only libraries -->
+### I. Test-First (NON-NEGOTIABLE)
+Kỷ luật **Test-Driven Development (TDD)** là bắt buộc, không thương lượng.
+- Viết test **trước** khi viết code triển khai.
+- Tuân thủ chu trình **Red → Green → Refactor**: test phải **đỏ (fail)** trước, rồi mới implement cho **xanh (pass)**, sau đó refactor.
+- Ở bước `/speckit-tasks`: task viết test luôn đứng **trước** task implement tương ứng.
+- Code "trông đúng" mà không có test chứng minh thì coi như **chưa hoàn thành**.
 
-### [PRINCIPLE_2_NAME]
-<!-- Example: II. CLI Interface -->
-[PRINCIPLE_2_DESCRIPTION]
-<!-- Example: Every library exposes functionality via CLI; Text in/out protocol: stdin/args → stdout, errors → stderr; Support JSON + human-readable formats -->
+### II. Spec-Driven (Spec là nguồn sự thật)
+- Với feature có phạm vi rõ ràng (đặc biệt trong `conquer/`): **không viết code khi chưa có spec**.
+- Trình tự: `constitution → specify → (clarify) → plan → tasks → implement`.
+- Spec mô tả *cái gì* cần đúng; test *chứng minh* nó đúng; agent *triển khai*.
+- Code practice nhỏ theo buổi học (`M01-.../`) được miễn quy trình spec — làm trực tiếp.
 
-### [PRINCIPLE_3_NAME]
-<!-- Example: III. Test-First (NON-NEGOTIABLE) -->
-[PRINCIPLE_3_DESCRIPTION]
-<!-- Example: TDD mandatory: Tests written → User approved → Tests fail → Then implement; Red-Green-Refactor cycle strictly enforced -->
+### III. Git Discipline — GitFlow & truy vết
+- Tuân theo GitFlow (xem `BRANCHING.md`): làm việc trên `develop`; **không commit thẳng vào `production`**.
+- Mỗi feature/spec một nhánh `feature/*` tạo từ `develop`; sửa khẩn cấp dùng `hotfix/*` từ `production`.
+- Commit nhỏ, thông điệp theo Conventional Commits (`feat`, `fix`, `docs`, `test`, `refactor`, `chore`).
+- Chỉ commit/push khi được yêu cầu.
 
-### [PRINCIPLE_4_NAME]
-<!-- Example: IV. Integration Testing -->
-[PRINCIPLE_4_DESCRIPTION]
-<!-- Example: Focus areas requiring integration tests: New library contract tests, Contract changes, Inter-service communication, Shared schemas -->
+### IV. Reproducibility (cho pipeline AI/ML)
+- Mọi bước pipeline có **input/output rõ ràng**, kiểm soát được lỗi và dễ bảo trì.
+- Cố định **random seed**; ghi rõ phiên bản dữ liệu (data versioning) và tham số.
+- Chạy lại cùng đầu vào → cùng kết quả. Kết quả phải **đo lường được** bằng metric phù hợp.
 
-### [PRINCIPLE_5_NAME]
-<!-- Example: V. Observability, VI. Versioning & Breaking Changes, VII. Simplicity -->
-[PRINCIPLE_5_DESCRIPTION]
-<!-- Example: Text I/O ensures debuggability; Structured logging required; Or: MAJOR.MINOR.BUILD format; Or: Start simple, YAGNI principles -->
+### V. Simplicity & YAGNI
+- Bắt đầu tối giản; chỉ thêm abstraction/công cụ khi thực sự cần.
+- Không thêm IDE chuyên dụng hay framework multi-agent ở giai đoạn học.
+- Mọi độ phức tạp phát sinh phải được biện minh trong spec/plan.
 
-## [SECTION_2_NAME]
-<!-- Example: Additional Constraints, Security Requirements, Performance Standards, etc. -->
+## Additional Constraints — Tech Stack
 
-[SECTION_2_CONTENT]
-<!-- Example: Technology stack requirements, compliance standards, deployment policies, etc. -->
+- Ngôn ngữ: **Python 3.10+**. Kiểm thử: **pytest**. Notebook: Colab-friendly.
+- Thư viện dữ liệu nền: NumPy, Pandas (và Polars/DuckDB khi cần hiệu năng).
+- SQL minh hoạ bằng `sqlite3` trong notebook; chuẩn triển khai là **PostgreSQL**.
+- Không commit dữ liệu nặng (đã cấu hình `.gitignore`): `*.csv`, `*.parquet`, `data/`, `models/`.
+- Pipeline AI/ML tham chiếu 9 bước: Input → Ingestion → Validation → Preprocessing → Feature Engineering → Model → Evaluation → Output → Monitoring. Vai trò chủ repo: **AI Engineer — Pipeline**.
 
-## [SECTION_3_NAME]
-<!-- Example: Development Workflow, Review Process, Quality Gates, etc. -->
+## Development Workflow — Quality Gates
 
-[SECTION_3_CONTENT]
-<!-- Example: Code review requirements, testing gates, deployment approval process, etc. -->
+1. **Spec** (`/speckit-specify`) — chốt phạm vi & tiêu chí chấp nhận.
+2. **Plan** (`/speckit-plan`) — kiến trúc, tech choices, ràng buộc.
+3. **Tasks** (`/speckit-tasks`) — task **test trước**, implement sau.
+4. **Implement** (`/speckit-implement`) — Red → Green → Refactor cho từng task.
+5. **Gate trước khi merge:** test xanh hết · tuân thủ hiến chương · spec & code khớp nhau.
 
 ## Governance
-<!-- Example: Constitution supersedes all other practices; Amendments require documentation, approval, migration plan -->
 
-[GOVERNANCE_RULES]
-<!-- Example: All PRs/reviews must verify compliance; Complexity must be justified; Use [GUIDANCE_FILE] for runtime development guidance -->
+- Hiến chương này **đứng trên** mọi thói quen làm việc khác; khi xung đột, hiến chương thắng.
+- Sửa đổi hiến chương phải ghi rõ lý do, tăng version (semver) và cập nhật ngày.
+- Mọi review phải kiểm tra tuân thủ; độ phức tạp phải được biện minh.
+- Hướng dẫn vận hành hằng ngày (lệnh build/test/env) nằm ở `CLAUDE.md`.
 
-**Version**: [CONSTITUTION_VERSION] | **Ratified**: [RATIFICATION_DATE] | **Last Amended**: [LAST_AMENDED_DATE]
-<!-- Example: Version: 2.1.1 | Ratified: 2025-06-13 | Last Amended: 2025-07-16 -->
+**Version**: 1.0.0 | **Ratified**: 2026-06-05 | **Last Amended**: 2026-06-05
