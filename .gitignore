@@ -22,5 +22,5 @@ models/
 .vscode/
 .idea/
 
-# Claude Code — settings cá nhân (giữ settings.json chung, bỏ local)
-.claude/settings.local.json
+# Claude Code — KHÔNG đẩy config cá nhân/tool lên remote
+.claude/
