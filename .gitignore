@@ -22,5 +22,6 @@ models/
 .vscode/
 .idea/
 
-# Claude Code — KHÔNG đẩy config cá nhân/tool lên remote
+# Claude Code & Spec Kit — KHÔNG đẩy config cá nhân/tool lên remote
 .claude/
+.specify/
