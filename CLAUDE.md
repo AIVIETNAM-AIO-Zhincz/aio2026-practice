@@ -43,9 +43,36 @@ python3 -m venv .venv && source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
+## Coding Standards
+
+Định nghĩa một lần, agent tuân theo cho mọi spec/code (mượn ý "standards layer" của Agent OS, đặt trong khung Spec Kit).
+
+**Python**
+- Tuân thủ **PEP 8**; thụt lề 4 dấu cách; dòng tối đa ~100 ký tự.
+- Đặt tên: `snake_case` cho hàm/biến, `PascalCase` cho class, `UPPER_SNAKE` cho hằng số.
+- **Type hint** cho tham số và giá trị trả về của hàm public.
+- **Docstring** tiếng Việt ngắn gọn cho mỗi hàm/class (mô tả mục đích, input/output).
+- Ưu tiên hàm thuần (pure function), dễ test; tránh side-effect ẩn.
+- `if __name__ == "__main__":` cho phần demo/chạy thử, không để code chạy ở cấp module.
+
+**Cấu trúc & thư viện**
+- Mỗi buổi học một thư mục `M{NN}-.../W{NN}/{thứ tự}_{chủ đề}/`.
+- Thư viện nền: NumPy, Pandas (Polars/DuckDB khi cần hiệu năng). Không thêm dependency mới khi chưa cần (YAGNI).
+- Dữ liệu nặng không commit (`.gitignore` đã cấu hình).
+
+**Test (theo constitution — TDD)**
+- Test đặt cùng cấp hoặc trong `tests/`, đặt tên `test_*.py`, chạy bằng `pytest`.
+- Viết test **trước**; mỗi hàm có ít nhất một test cho case thường + case biên.
+
+**Notebook**
+- Colab-friendly: dùng thư viện có sẵn; SQL minh hoạ bằng `sqlite3`, ghi chú khác biệt PostgreSQL.
+- Cell markdown mô tả ngắn trước mỗi cụm code; in kết quả kỳ vọng kèm comment.
+
+> Nguyên tắc bất biến nằm ở `.specify/memory/constitution.md`; mục này là chuẩn vận hành chi tiết.
+
 ## Commit message
 
-Tiếng Anh ngắn gọn theo Conventional Commits khi hợp lý (`feat:`, `fix:`, `docs:`, `refactor:`).
+Tiếng Anh ngắn gọn theo Conventional Commits khi hợp lý (`feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore:`).
 
 <!-- SPECKIT START -->
 For additional context about technologies to be used, project structure,
