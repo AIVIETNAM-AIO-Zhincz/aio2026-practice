@@ -4,6 +4,24 @@ Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and 
 
 Notes lý thuyết lưu ở Obsidian vault; repo này chứa **code thực hành** theo từng buổi.
 
+## Phương pháp làm việc — Spec-Driven Development
+
+Bộ công cụ tối thiểu: **Spec Kit (khung) + Claude Code (động cơ) + Git/GitFlow + kỷ luật TDD**.
+
+| Thành phần | Vai trò | Loại |
+|---|---|---|
+| **Spec Kit** | Tổ chức spec → plan → task (đạo diễn) | Công cụ (cài qua `uv`) |
+| **Claude Code** | Agent thực thi, sinh & sửa code (diễn viên) | Công cụ |
+| **Git / GitFlow** | Branch hiện tại = feature context; cô lập & truy vết | Công cụ (xem `BRANCHING.md`) |
+| **TDD** | Test chứng minh spec đúng — viết test trước, implement sau | **Kỷ luật**, không phải phần mềm |
+| **`CLAUDE.md`** | Context bền vững: lệnh build/test, quy ước môi trường | File |
+
+**Nguyên tắc:** Spec nói *cái gì* cần đúng → Test *chứng minh* nó đúng → Claude Code *implement*. Ở bước `/speckit.tasks`, luôn yêu cầu tạo **task viết test trước**, rồi mới task implement.
+
+**Phạm vi áp dụng:** dùng Spec Kit chủ yếu cho **project có spec rõ ràng** (`conquer/` — pipeline AI/ML). Code practice nhỏ theo từng buổi (`M01-.../`) làm thoải mái, không cần spec.
+
+> Spec Kit chưa được khởi tạo trong repo. Khi cần: `uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai claude` (tạo `.specify/` + slash command `/speckit.*`).
+
 ## Cấu trúc
 
 ```
