@@ -4,6 +4,7 @@ Gồm sigmoid, ReLU, ELU và một hàm điều phối theo tên.
 """
 
 import math
+from collections.abc import Callable
 
 
 def sigmoid(x: float) -> float:
@@ -23,6 +24,10 @@ def elu(x: float, alpha: float = 0.01) -> float:
 
 def calculate_activation_function(x: float, act_name: str) -> float | None:
     """Tính hàm kích hoạt theo tên. Trả None nếu act_name không hợp lệ."""
-    funcs = {"sigmoid": sigmoid, "relu": relu, "elu": elu}
+    funcs: dict[str, Callable[[float], float]] = {
+        "sigmoid": sigmoid,
+        "relu": relu,
+        "elu": elu,
+    }
     func = funcs.get(act_name)
     return func(x) if func is not None else None
