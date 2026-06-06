@@ -4,7 +4,7 @@ Hướng dẫn cho Claude Code khi làm việc trong repo này.
 
 ## Dự án
 
-Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and Data Science) và project **AIO Conquer 2026**. Chủ repo giữ vai trò **AI Engineer - Pipeline** trong team Conquer.
+Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and Data Science) và project **AIO Conquer 2026**. Chủ repo giữ vai trò **Tech Leader** (trưởng nhóm kỹ thuật) trong team Conquer — điều phối, rã task, theo dõi tiến độ và merge output của nhóm.
 
 Notes lý thuyết nằm ở Obsidian vault (ngoài repo); repo này chứa **code thực hành** theo từng buổi học.
 

@@ -32,7 +32,7 @@ M01-python-basics/        # Module 1 — Toán cơ bản & lập trình Python (
     ├── 03_branching/        # biến, hàm, if-elif-else, ReLU, rule-based chatbot
     ├── 04_basic_sql/        # CREATE/INSERT/SELECT/WHERE/JOIN (PostgreSQL)
     └── 05_string_loops/     # for/while, range, accumulator, ước lượng Pi/e, Newton sqrt
-conquer/                  # Project AIO Conquer 2026 (vai trò: AI Engineer - Pipeline)
+conquer/                  # Project AIO Conquer 2026 (vai trò: Tech Leader — điều phối nhóm)
 slides/                   # Slide buổi học (gitignore — chỉ giữ README)
 .github/workflows/ci.yml  # CI: lint + format check + test
 ```
