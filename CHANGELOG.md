@@ -7,6 +7,7 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/) và [SemVer](https
 
 ### Added
 - Cấu hình `mypy` (kiểm type tĩnh) trong `pyproject.toml`, pre-commit và CI — enforce type hint cho `aiolib/`.
+- Đo độ phủ test bằng `pytest-cov`: report `term-missing`, ngưỡng tối thiểu `--cov-fail-under=90` (hiện `aiolib` 100%).
 - `CHANGELOG.md` theo chuẩn Keep a Changelog.
 
 ### Changed

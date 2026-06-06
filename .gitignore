@@ -30,6 +30,8 @@ models/
 .pytest_cache/
 .ruff_cache/
 .mypy_cache/
+.coverage
+htmlcov/
 
 # Slide / tài liệu buổi học — lưu local, KHÔNG đẩy lên remote (chỉ giữ README)
 slides/**
