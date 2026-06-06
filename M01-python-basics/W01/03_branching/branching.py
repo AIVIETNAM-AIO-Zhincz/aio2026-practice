@@ -26,5 +26,5 @@ def classify(score):
 
 if __name__ == "__main__":
     data = [1, 5, -4, 3, -2]
-    print("ReLU:", [relu(x) for x in data])      # [1, 5, 0, 3, 0]
-    print(classify(7.0))                          # Khá
+    print("ReLU:", [relu(x) for x in data])  # [1, 5, 0, 3, 0]
+    print(classify(7.0))  # Khá

@@ -20,19 +20,21 @@ Bộ công cụ tối thiểu: **Spec Kit (khung) + Claude Code (động cơ) + 
 
 **Phạm vi áp dụng:** dùng Spec Kit chủ yếu cho **project có spec rõ ràng** (`conquer/` — pipeline AI/ML). Code practice nhỏ theo từng buổi (`M01-.../`) làm thoải mái, không cần spec.
 
-> Spec Kit chưa được khởi tạo trong repo. Khi cần: `uvx --from git+https://github.com/github/spec-kit.git specify init --here --ai claude` (tạo `.specify/` + slash command `/speckit.*`).
+> Spec Kit đã được khởi tạo (`.specify/` + slash command `/speckit.*`). Lưu ý `.specify/` và `.claude/` **được gitignore**, không đẩy lên remote.
 
 ## Cấu trúc
 
 ```
+aiolib/                   # Thư viện hàm thực hành (có test) — activations, metrics, trig
+tests/                    # Test pytest cho aiolib (TDD)
 M01-python-basics/        # Module 1 — Toán cơ bản & lập trình Python (02/06 → 05/07/2026)
 └── W01/
-    ├── 02_tabular_timeseries/
     ├── 03_branching/        # biến, hàm, if-elif-else, ReLU, rule-based chatbot
     ├── 04_basic_sql/        # CREATE/INSERT/SELECT/WHERE/JOIN (PostgreSQL)
     └── 05_string_loops/     # for/while, range, accumulator, ước lượng Pi/e, Newton sqrt
 conquer/                  # Project AIO Conquer 2026 (vai trò: AI Engineer - Pipeline)
-└── pipeline/
+slides/                   # Slide buổi học (gitignore — chỉ giữ README)
+.github/workflows/ci.yml  # CI: lint + format check + test
 ```
 
 ## Môi trường
@@ -40,8 +42,28 @@ conquer/                  # Project AIO Conquer 2026 (vai trò: AI Engineer - Pi
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
-pip install -r requirements.txt
+pip install -r requirements.txt          # thư viện chạy notebook
+pip install -r requirements-dev.txt      # công cụ dev (ruff, pytest, pre-commit)
+pre-commit install                       # bật hook chặn lỗi trước khi commit
 ```
+
+Runtime ghim ở `.python-version` (Python 3.10).
+
+## Chất lượng code & CI
+
+Quy chuẩn chạy **cả ở local lẫn CI** (tránh "lint trên máy tôi thì pass"):
+
+```bash
+ruff check .          # lint
+ruff format .         # format (tương thích Black, line-length 100)
+pytest                # chạy test
+```
+
+- **Pre-commit** (`.pre-commit-config.yaml`): tự lint/format + dọn whitespace/EOF khi commit.
+- **GitHub Actions** (`.github/workflows/ci.yml`): trên push/PR vào `production`/`develop` → `ruff check` → `ruff format --check` → `pytest`.
+- **TDD:** viết test trước trong `tests/` (`test_*.py`), implement trong `aiolib/` sau.
+
+> Checklist nền tảng khi khởi tạo repo: xem note `DevProd 5 - Repo Setup Checklist` trong Obsidian vault.
 
 ## Tiến độ Module 1
 

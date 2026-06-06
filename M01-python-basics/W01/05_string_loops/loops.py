@@ -2,6 +2,7 @@
 AIO2026 M01W01 - Basic Python (String and Loops) — 05/06/2026
 Vòng lặp for/while, biến tích luỹ, các ví dụ ước lượng.
 """
+
 import math
 
 
@@ -39,9 +40,9 @@ def factorial(n):
 
 
 if __name__ == "__main__":
-    print("Pi ~", estimate_pi_leibniz())   # ~3.1416
-    print("e  ~", estimate_e())             # ~2.71828
-    print("sqrt(9)  =", sqrt_newton(9))     # 3.0
-    print("sqrt(16) =", sqrt_newton(16))    # ~4.0
-    print("5! =", factorial(5))             # 120
+    print("Pi ~", estimate_pi_leibniz())  # ~3.1416
+    print("e  ~", estimate_e())  # ~2.71828
+    print("sqrt(9)  =", sqrt_newton(9))  # 3.0
+    print("sqrt(16) =", sqrt_newton(16))  # ~4.0
+    print("5! =", factorial(5))  # 120
     print("math check:", math.pi, math.e)
