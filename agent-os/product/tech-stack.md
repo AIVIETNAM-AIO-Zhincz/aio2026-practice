@@ -2,8 +2,8 @@
 
 ## Frontend
 
-- **Streamlit** (ưu tiên cho giai đoạn đầu — nhanh, hợp Python) hoặc **React + Tailwind** khi cần UI hoàn chỉnh.
-- Biểu đồ: `matplotlib` / `plotly`.
+- **React + Vite** (đã chốt) — single-page app gọi backend qua REST API.
+- Biểu đồ: thư viện JS (vd `recharts` / `chart.js`).
 
 ## Backend
 
@@ -14,6 +14,7 @@
 ## Database
 
 - **PostgreSQL** (production) + **SQLAlchemy**; **SQLite** cho dev.
+- **Migrations: Alembic** (autogenerate từ metadata, mỗi đổi schema một revision).
 - Mọi thực thể gắn `space_id` (lọc theo không gian + kiểm tra quyền).
 
 ## AI
