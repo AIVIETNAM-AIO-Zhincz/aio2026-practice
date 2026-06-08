@@ -10,6 +10,10 @@ api:
   fastapi:
     description: FastAPI router/schema conventions, RBAC enforcement, space isolation, audit log
 
+database:
+  migrations:
+    description: Alembic migration workflow, one revision per schema change, autogenerate and review
+
 testing:
   tdd:
     description: Test-Driven Development with pytest, edge cases, permission and AI fallback tests
