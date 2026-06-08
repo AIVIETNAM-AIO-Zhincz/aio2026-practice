@@ -36,3 +36,4 @@ htmlcov/
 # Slide / tài liệu buổi học — lưu local, KHÔNG đẩy lên remote (chỉ giữ README)
 slides/**
 !slides/README.md
+/conquer/sample
