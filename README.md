@@ -4,23 +4,28 @@ Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and 
 
 Notes lý thuyết lưu ở Obsidian vault; repo này chứa **code thực hành** theo từng buổi.
 
-## Phương pháp làm việc — Spec-Driven Development
+## Phương pháp làm việc — Spec-Driven Development (Agent OS)
 
-Bộ công cụ tối thiểu: **Spec Kit (khung) + Claude Code (động cơ) + Git/GitFlow + kỷ luật TDD**.
+Bộ công cụ tối thiểu: **Agent OS (khung) + Claude Code (động cơ) + Git/GitFlow + kỷ luật TDD**.
 
 | Thành phần | Vai trò | Loại |
 |---|---|---|
-| **Spec Kit** | Tổ chức spec → plan → task (đạo diễn) | Công cụ (cài qua `uv`) |
+| **Agent OS** | Standards + spec workflow (đạo diễn); slash command cho Claude Code | Công cụ (cài qua `~/agent-os/scripts/project-install.sh`) |
 | **Claude Code** | Agent thực thi, sinh & sửa code (diễn viên) | Công cụ |
 | **Git / GitFlow** | Branch hiện tại = feature context; cô lập & truy vết | Công cụ (xem `BRANCHING.md`) |
 | **TDD** | Test chứng minh spec đúng — viết test trước, implement sau | **Kỷ luật**, không phải phần mềm |
 | **`CLAUDE.md`** | Context bền vững: lệnh build/test, quy ước môi trường | File |
 
-**Nguyên tắc:** Spec nói *cái gì* cần đúng → Test *chứng minh* nó đúng → Claude Code *implement*. Ở bước `/speckit.tasks`, luôn yêu cầu tạo **task viết test trước**, rồi mới task implement.
+**Nguyên tắc:** Standards + Spec nói *cái gì* cần đúng → Test *chứng minh* nó đúng → Claude Code *implement*. Luôn tạo **task viết test trước**, rồi mới task implement.
 
-**Phạm vi áp dụng:** dùng Spec Kit chủ yếu cho **project có spec rõ ràng** (`conquer/` — pipeline AI/ML). Code practice nhỏ theo từng buổi (`M01-.../`) làm thoải mái, không cần spec.
+**Phạm vi áp dụng:** dùng Agent OS chủ yếu cho **project có spec rõ ràng** (`conquer/` — pipeline AI/ML). Code practice nhỏ theo từng buổi (`M01-.../`) làm thoải mái, không cần spec.
 
-> Spec Kit đã được khởi tạo (`.specify/` + slash command `/speckit.*`). Lưu ý `.specify/` và `.claude/` **được gitignore**, không đẩy lên remote.
+**Agent OS (v3.0):**
+- `agent-os/standards/` — coding standards của project (được commit, dùng chung cả team).
+- `.claude/commands/agent-os/` — slash command cho Claude Code (`.claude/` **gitignore**; mỗi người tự chạy `project-install.sh` để có).
+- Lệnh chính: `/discover-standards` (rút pattern từ codebase) · `/inject-standards` · `/plan-product` · `/shape-spec`.
+
+> Cài lại trên máy khác: `cd ~ && git clone https://github.com/buildermethods/agent-os.git && rm -rf ~/agent-os/.git`, rồi trong repo chạy `~/agent-os/scripts/project-install.sh`.
 
 ## Cấu trúc
 
