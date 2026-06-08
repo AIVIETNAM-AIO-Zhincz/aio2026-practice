@@ -45,7 +45,7 @@ pip install -r requirements.txt
 
 ## Coding Standards
 
-Định nghĩa một lần, agent tuân theo cho mọi spec/code (mượn ý "standards layer" của Agent OS, đặt trong khung Spec Kit).
+Định nghĩa một lần, agent tuân theo cho mọi spec/code ("standards layer" của Agent OS — xem `agent-os/standards/`).
 
 **Python**
 - Tuân thủ **PEP 8**; thụt lề 4 dấu cách; dòng tối đa ~100 ký tự.
@@ -60,7 +60,7 @@ pip install -r requirements.txt
 - Thư viện nền: NumPy, Pandas (Polars/DuckDB khi cần hiệu năng). Không thêm dependency mới khi chưa cần (YAGNI).
 - Dữ liệu nặng không commit (`.gitignore` đã cấu hình).
 
-**Test (theo constitution — TDD)**
+**Test (TDD)**
 - Test đặt cùng cấp hoặc trong `tests/`, đặt tên `test_*.py`, chạy bằng `pytest`.
 - Viết test **trước**; mỗi hàm có ít nhất một test cho case thường + case biên.
 
@@ -68,13 +68,15 @@ pip install -r requirements.txt
 - Colab-friendly: dùng thư viện có sẵn; SQL minh hoạ bằng `sqlite3`, ghi chú khác biệt PostgreSQL.
 - Cell markdown mô tả ngắn trước mỗi cụm code; in kết quả kỳ vọng kèm comment.
 
-> Nguyên tắc bất biến nằm ở `.specify/memory/constitution.md`; mục này là chuẩn vận hành chi tiết.
+> Standards chi tiết quản lý bằng **Agent OS** ở `agent-os/standards/` (chạy `/discover-standards` để rút pattern từ codebase, `/inject-standards` để nạp vào context).
 
 ## Commit message
 
 Tiếng Anh ngắn gọn theo Conventional Commits khi hợp lý (`feat:`, `fix:`, `docs:`, `test:`, `refactor:`, `chore:`).
 
-<!-- SPECKIT START -->
-For additional context about technologies to be used, project structure,
-shell commands, and other important information, read the current plan
-<!-- SPECKIT END -->
+## Agent OS
+
+Repo dùng **Agent OS v3.0** (thay Spec Kit) cho spec-driven development:
+- `agent-os/standards/` — coding standards (commit, dùng chung team).
+- `.claude/commands/agent-os/` — slash command cho Claude Code (`.claude/` gitignore; chạy `~/agent-os/scripts/project-install.sh` để cài lại).
+- Lệnh: `/discover-standards` · `/inject-standards` · `/index-standards` · `/plan-product` · `/shape-spec`.
