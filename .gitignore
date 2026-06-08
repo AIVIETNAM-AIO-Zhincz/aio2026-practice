@@ -17,6 +17,10 @@ models/
 *.ckpt
 *.pt
 
+# Ngoại lệ: `app/models/` là package Python (SQLAlchemy models), KHÔNG phải data
+!conquer/budget-planner/backend/app/models/
+!conquer/budget-planner/backend/app/models/**
+
 # OS / editor
 .DS_Store
 .vscode/
