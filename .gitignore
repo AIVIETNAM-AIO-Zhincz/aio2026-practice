@@ -17,7 +17,27 @@ models/
 *.ckpt
 *.pt
 
+# Ngoại lệ: `app/models/` là package Python (SQLAlchemy models), KHÔNG phải data
+!conquer/budget-planner/backend/app/models/
+!conquer/budget-planner/backend/app/models/**
+
 # OS / editor
 .DS_Store
 .vscode/
 .idea/
+
+# Claude Code & Spec Kit — KHÔNG đẩy config cá nhân/tool lên remote
+.claude/
+.specify/
+
+# Lint/test cache
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.coverage
+htmlcov/
+
+# Slide / tài liệu buổi học — lưu local, KHÔNG đẩy lên remote (chỉ giữ README)
+slides/**
+!slides/README.md
+/conquer/sample

@@ -2,18 +2,19 @@
 AIO2026 M01W01 - Basic Python (String and Loops) — 05/06/2026
 Vòng lặp for/while, biến tích luỹ, các ví dụ ước lượng.
 """
+
 import math
 
 
-def estimate_pi_leibniz(n=1000):
+def estimate_pi_leibniz(n: int = 1000) -> float:
     """Ước lượng Pi bằng chuỗi Gregory-Leibniz."""
-    pi = 0
+    pi = 0.0
     for i in range(1, n):
         pi += (-1) ** (i + 1) / (2 * i - 1)
     return pi * 4
 
 
-def estimate_e(n=20):
+def estimate_e(n: int = 20) -> float:
     """Ước lượng số e = 1 + 1/1! + 1/2! + ... + 1/n!"""
     e, fact = 1.0, 1
     for i in range(1, n + 1):
@@ -22,7 +23,7 @@ def estimate_e(n=20):
     return e
 
 
-def sqrt_newton(a, n=5):
+def sqrt_newton(a: float, n: int = 5) -> float:
     """Căn bậc hai bằng phương pháp Newton."""
     result = a / 2.0
     for _ in range(n):
@@ -30,7 +31,7 @@ def sqrt_newton(a, n=5):
     return result
 
 
-def factorial(n):
+def factorial(n: int) -> int:
     """Giai thừa bằng vòng lặp nhân dồn."""
     result = 1
     for i in range(1, n + 1):
@@ -39,9 +40,9 @@ def factorial(n):
 
 
 if __name__ == "__main__":
-    print("Pi ~", estimate_pi_leibniz())   # ~3.1416
-    print("e  ~", estimate_e())             # ~2.71828
-    print("sqrt(9)  =", sqrt_newton(9))     # 3.0
-    print("sqrt(16) =", sqrt_newton(16))    # ~4.0
-    print("5! =", factorial(5))             # 120
+    print("Pi ~", estimate_pi_leibniz())  # ~3.1416
+    print("e  ~", estimate_e())  # ~2.71828
+    print("sqrt(9)  =", sqrt_newton(9))  # 3.0
+    print("sqrt(16) =", sqrt_newton(16))  # ~4.0
+    print("5! =", factorial(5))  # 120
     print("math check:", math.pi, math.e)

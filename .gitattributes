@@ -1,0 +1,15 @@
+# Chuẩn hoá line-ending: luôn dùng LF trong repo
+* text=auto eol=lf
+
+# File nhị phân — không đụng vào nội dung, không tính diff
+*.pdf binary
+*.pptx binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.gif binary
+*.ckpt binary
+*.pt binary
+
+# Notebook: gom làm "generated" để bớt nhiễu khi review diff
+*.ipynb linguist-generated=true

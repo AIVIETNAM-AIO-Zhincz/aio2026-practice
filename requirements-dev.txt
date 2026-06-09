@@ -1,0 +1,6 @@
+# Công cụ dev (lint/format/test/hooks) — không cần khi chỉ chạy notebook
+ruff
+mypy
+pytest
+pytest-cov
+pre-commit
