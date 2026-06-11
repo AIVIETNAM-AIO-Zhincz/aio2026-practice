@@ -18,6 +18,7 @@
     "recurring": "Định kỳ",
     "goals": "Mục tiêu",
     "reports": "Báo cáo",
+    "annual": "Tổng quan năm",
     "members": "Thành viên",
     "settings": "Cài đặt"
   },
@@ -136,6 +137,7 @@
     },
     "noResult": "Không có giao dịch khớp bộ lọc.",
     "summary": { "income": "Tổng thu", "expense": "Tổng chi", "balance": "Số dư" },
+    "rowsPerPage": "Số dòng/trang",
     "import": {
       "button": "Nhập CSV",
       "title": "Nhập giao dịch từ CSV",
@@ -170,7 +172,9 @@
       "type": "Loại",
       "parent": "Danh mục cha",
       "parentNone": "— Không có (danh mục gốc) —",
-      "nameRequired": "Tên không được để trống"
+      "nameRequired": "Tên không được để trống",
+      "needLevel": "Mức cần thiết",
+      "needLevelHint": "Để phân tích chi tiêu (Bắt buộc/Tùy chọn/Lãng phí)"
     }
   },
   "budgets": {
@@ -219,6 +223,7 @@
       "title": "Mời thành viên",
       "email": "Email",
       "emailHint": "Người dùng phải đã có tài khoản",
+      "emailInvalid": "Email không hợp lệ",
       "role": "Vai trò",
       "submit": "Gửi lời mời"
     }
@@ -280,7 +285,8 @@
       "editTitle": "Sửa ví",
       "name": "Tên ví",
       "type": "Loại",
-      "balance": "Số dư"
+      "balance": "Số dư",
+      "nameRequired": "Vui lòng nhập tên ví"
     },
     "transferForm": {
       "title": "Chuyển tiền giữa ví",
@@ -305,6 +311,38 @@
     "q2": "Cà phê 30k",
     "q3": "Số dư ví?"
   },
+  "annual": {
+    "year": "Năm",
+    "empty": "Chưa có dữ liệu năm {{year}}",
+    "totalIncome": "Tổng thu cả năm",
+    "totalExpense": "Tổng chi cả năm",
+    "endBalance": "Số dư cuối năm",
+    "chartTitle": "Thu/chi 12 tháng + số dư luỹ kế",
+    "income": "Thu",
+    "expense": "Chi",
+    "cumulative": "Số dư luỹ kế"
+  },
+  "plan": {
+    "title": "Kế hoạch tháng",
+    "month": "Tháng",
+    "plannedIncome": "Thu dự kiến",
+    "plannedExpense": "Chi dự kiến",
+    "save": "Lưu kế hoạch",
+    "saved": "Đã lưu kế hoạch",
+    "income": "Thu nhập",
+    "expense": "Chi tiêu",
+    "saving": "Tiết kiệm",
+    "met": "Đạt",
+    "notMet": "Chưa đạt",
+    "over": "Vượt",
+    "loadError": "Không tải được kế hoạch",
+    "saveError": "Không lưu được kế hoạch"
+  },
+  "needLevel": {
+    "mandatory": "Bắt buộc",
+    "optional": "Tùy chọn",
+    "wasteful": "Lãng phí"
+  },
   "reports": {
     "from": "Từ ngày",
     "to": "Đến ngày",
@@ -318,6 +356,8 @@
     "overTime": "Thu/chi theo ngày",
     "empty": "Không có dữ liệu trong khoảng đã chọn.",
     "loadError": "Không tải được báo cáo",
+    "vsPrev": "so kỳ trước",
+    "byNeedLevel": "Chi theo mức cần thiết",
     "exportError": "Không xuất được CSV"
   },
   "recurring": {
@@ -374,12 +414,14 @@
     "deleteConfirm": "Xoá mục tiêu \"{{name}}\"? Ví tiết kiệm vẫn được giữ.",
     "empty": "Chưa có mục tiêu. Bấm \"Thêm mục tiêu\" để bắt đầu.",
     "noWallets": "Cần có ít nhất một ví để tạo mục tiêu.",
+    "fundTypes": { "emergency": "Khẩn cấp", "long_term": "Dài hạn", "general": "Chung" },
     "form": {
       "addTitle": "Thêm mục tiêu",
       "editTitle": "Sửa mục tiêu",
       "name": "Tên mục tiêu",
       "target": "Số tiền mục tiêu",
       "wallet": "Ví tiết kiệm",
+      "fundType": "Loại quỹ",
       "deadline": "Thời hạn (tuỳ chọn)"
     },
     "contributeForm": {
@@ -406,6 +448,8 @@
     "walletsDesc": "Quản lý ví & số dư, chuyển tiền giữa ví",
     "reports": "Báo cáo",
     "reportsDesc": "Biểu đồ & phân tích chi tiêu",
+    "annual": "Tổng quan năm",
+    "annualDesc": "12 tháng: thu/chi + số dư luỹ kế",
     "members": "Thành viên",
     "membersDesc": "Mời thành viên, phân vai trò (RBAC)",
     "settings": "Cài đặt",

@@ -78,6 +78,10 @@ class Category(Base):
     name: Mapped[str] = mapped_column(String(255))
     parent_id: Mapped[str | None] = mapped_column(ForeignKey("categories.id"), nullable=True)
     type: Mapped[str] = mapped_column(String(8), default="expense")  # income/expense
+    # Mức cần thiết của danh mục chi: mandatory|optional|wasteful (cho phân tích 50/30/20).
+    need_level: Mapped[str] = mapped_column(
+        String(16), default="optional", server_default="optional"
+    )
 
 
 class Transaction(Base):
@@ -105,6 +109,18 @@ class Budget(Base):
     category_id: Mapped[str | None] = mapped_column(ForeignKey("categories.id"), nullable=True)
     period: Mapped[str] = mapped_column(String(7), default="")  # YYYY-MM
     limit_amount: Mapped[float] = mapped_column(Float, default=0.0)
+
+
+class MonthlyPlan(Base):
+    """Kế hoạch tổng theo tháng: thu/chi dự kiến (1 plan / space / period)."""
+
+    __tablename__ = "monthly_plans"
+
+    id: Mapped[str] = mapped_column(String(36), primary_key=True, default=_uuid)
+    space_id: Mapped[str] = mapped_column(ForeignKey("spaces.id"), index=True)
+    period: Mapped[str] = mapped_column(String(7), default="")  # YYYY-MM
+    planned_income: Mapped[float] = mapped_column(Float, default=0.0)
+    planned_expense: Mapped[float] = mapped_column(Float, default=0.0)
 
 
 class AuditLog(Base):
@@ -162,6 +178,8 @@ class Goal(Base):
     target_amount: Mapped[float] = mapped_column(Float)
     wallet_id: Mapped[str] = mapped_column(ForeignKey("wallets.id"))
     deadline: Mapped[date | None] = mapped_column(Date, nullable=True)
+    # Loại quỹ: emergency|long_term|general (phân loại mục tiêu tiết kiệm).
+    fund_type: Mapped[str] = mapped_column(String(16), default="general", server_default="general")
     created_at: Mapped[datetime] = mapped_column(DateTime, default=_now)
 
 

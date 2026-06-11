@@ -18,6 +18,7 @@
     "recurring": "Recurring",
     "goals": "Goals",
     "reports": "Reports",
+    "annual": "Annual",
     "members": "Members",
     "settings": "Settings"
   },
@@ -136,6 +137,7 @@
     },
     "noResult": "No transactions match the filters.",
     "summary": { "income": "Total income", "expense": "Total expense", "balance": "Balance" },
+    "rowsPerPage": "Rows per page",
     "import": {
       "button": "Import CSV",
       "title": "Import transactions from CSV",
@@ -170,7 +172,9 @@
       "type": "Type",
       "parent": "Parent category",
       "parentNone": "— None (top-level) —",
-      "nameRequired": "Name is required"
+      "nameRequired": "Name is required",
+      "needLevel": "Need level",
+      "needLevelHint": "For spending analysis (Mandatory/Optional/Wasteful)"
     }
   },
   "budgets": {
@@ -219,6 +223,7 @@
       "title": "Invite member",
       "email": "Email",
       "emailHint": "The user must already have an account",
+      "emailInvalid": "Invalid email address",
       "role": "Role",
       "submit": "Send invite"
     }
@@ -280,7 +285,8 @@
       "editTitle": "Edit wallet",
       "name": "Wallet name",
       "type": "Type",
-      "balance": "Balance"
+      "balance": "Balance",
+      "nameRequired": "Please enter a wallet name"
     },
     "transferForm": {
       "title": "Transfer between wallets",
@@ -305,6 +311,38 @@
     "q2": "Coffee 30k",
     "q3": "Wallet balance?"
   },
+  "annual": {
+    "year": "Year",
+    "empty": "No data for {{year}}",
+    "totalIncome": "Year income",
+    "totalExpense": "Year expense",
+    "endBalance": "Year-end balance",
+    "chartTitle": "12-month income/expense + running balance",
+    "income": "Income",
+    "expense": "Expense",
+    "cumulative": "Running balance"
+  },
+  "plan": {
+    "title": "Monthly plan",
+    "month": "Month",
+    "plannedIncome": "Planned income",
+    "plannedExpense": "Planned expense",
+    "save": "Save plan",
+    "saved": "Plan saved",
+    "income": "Income",
+    "expense": "Expense",
+    "saving": "Savings",
+    "met": "On track",
+    "notMet": "Below target",
+    "over": "Over",
+    "loadError": "Could not load plan",
+    "saveError": "Could not save plan"
+  },
+  "needLevel": {
+    "mandatory": "Mandatory",
+    "optional": "Optional",
+    "wasteful": "Wasteful"
+  },
   "reports": {
     "from": "From",
     "to": "To",
@@ -318,6 +356,8 @@
     "overTime": "Income/expense over time",
     "empty": "No data in the selected range.",
     "loadError": "Could not load report",
+    "vsPrev": "vs prev.",
+    "byNeedLevel": "Spending by need level",
     "exportError": "Could not export CSV"
   },
   "recurring": {
@@ -374,12 +414,14 @@
     "deleteConfirm": "Delete goal \"{{name}}\"? The savings wallet is kept.",
     "empty": "No goals yet. Click \"Add goal\" to start.",
     "noWallets": "You need at least one wallet to create a goal.",
+    "fundTypes": { "emergency": "Emergency", "long_term": "Long-term", "general": "General" },
     "form": {
       "addTitle": "Add goal",
       "editTitle": "Edit goal",
       "name": "Goal name",
       "target": "Target amount",
       "wallet": "Savings wallet",
+      "fundType": "Fund type",
       "deadline": "Deadline (optional)"
     },
     "contributeForm": {
@@ -406,6 +448,8 @@
     "walletsDesc": "Manage wallets & balances, transfer between wallets",
     "reports": "Reports",
     "reportsDesc": "Charts & spending analysis",
+    "annual": "Annual overview",
+    "annualDesc": "12 months: income/expense + running balance",
     "members": "Members",
     "membersDesc": "Invite members, assign roles (RBAC)",
     "settings": "Settings",

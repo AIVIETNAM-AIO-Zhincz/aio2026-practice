@@ -7,7 +7,7 @@ from datetime import date
 from sqlalchemy import func, select
 from sqlalchemy.orm import Session
 
-from app.models import Transaction
+from app.models import Category, Transaction
 
 
 def _conds(space_id: str, start: date | None, end: date | None) -> list:
@@ -40,6 +40,22 @@ def build_summary(db: Session, space_id: str, start: date | None, end: date | No
     ).all()
     by_category = [{"name": name or "Khác", "amount": float(amt)} for name, amt in cat_rows]
 
+    # Chi theo mức cần thiết: map giao dịch → need_level của danh mục (theo tên + space).
+    # Giao dịch không khớp danh mục nào → coi như 'optional'.
+    need_col = func.coalesce(Category.need_level, "optional")
+    nl_rows = db.execute(
+        select(need_col, func.sum(Transaction.amount))
+        .select_from(Transaction)
+        .outerjoin(
+            Category,
+            (Category.name == Transaction.category_name) & (Category.space_id == space_id),
+        )
+        .where(*conds, Transaction.type == "expense")
+        .group_by(need_col)
+        .order_by(func.sum(Transaction.amount).desc())
+    ).all()
+    by_need_level = [{"need_level": nl, "amount": float(amt)} for nl, amt in nl_rows]
+
     day_rows = db.execute(
         select(Transaction.date, Transaction.type, func.sum(Transaction.amount))
         .where(*conds)
@@ -56,8 +72,33 @@ def build_summary(db: Session, space_id: str, start: date | None, end: date | No
         "total_expense": expense,
         "balance": income - expense,
         "by_category": by_category,
+        "by_need_level": by_need_level,
         "by_day": by_day,
     }
+
+
+def build_annual_summary(db: Session, space_id: str, year: int) -> dict:
+    """Tổng hợp 12 tháng của một năm: thu/chi mỗi tháng + số dư luỹ kế.
+
+    Tái dùng ``build_summary`` (theo ngày) rồi gom theo tháng — không phụ thuộc DB.
+    """
+    summary = build_summary(db, space_id, date(year, 1, 1), date(year, 12, 31))
+    months = {
+        f"{year:04d}-{m:02d}": {"month": f"{year:04d}-{m:02d}", "income": 0.0, "expense": 0.0}
+        for m in range(1, 13)
+    }
+    for day in summary["by_day"]:
+        key = day["date"].strftime("%Y-%m")
+        if key in months:
+            months[key]["income"] += day["income"]
+            months[key]["expense"] += day["expense"]
+
+    result = [months[f"{year:04d}-{m:02d}"] for m in range(1, 13)]
+    balance = 0.0
+    for month in result:
+        balance += month["income"] - month["expense"]
+        month["balance"] = balance
+    return {"year": year, "months": result}
 
 
 def transactions_for_export(
