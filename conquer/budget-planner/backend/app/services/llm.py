@@ -14,20 +14,30 @@ import httpx
 
 from app.core.config import settings
 from app.services.categorizer import suggest_category
+from app.services.faq import FAQ_INTENTS
 
 # Các intent hỏi-đáp được phép (khớp với assistant.compute_answer).
-_INTENTS = ("expense_month", "income_month", "wallet_balance")
+_INTENTS = ("expense_month", "income_month", "wallet_balance", "allocation_review")
+
+_FAQ_LIST = ", ".join(f'"{i}"' for i in FAQ_INTENTS)
 
 _SYSTEM = (
     "Bạn là trợ lý tài chính cá nhân. Phân tích tin nhắn người dùng và TRẢ VỀ DUY NHẤT một JSON:\n"
-    '{"kind":"transaction"|"question"|"other","draft":{...}|null,'
-    '"question":<intent>|null,"reply":<string>|null}\n'
+    '{"kind":"transaction"|"question"|"faq"|"goal"|"other","draft":{...}|null,'
+    '"question":<intent>|null,"faq":<faq_id>|null,'
+    '"target_amount":<số|null>,"months":<số|null>,"reply":<string>|null}\n'
     '- "transaction": nếu là ghi một giao dịch. draft = '
     '{"amount":<số VND nguyên>,"type":"income"|"expense",'
     '"category_name":<chuỗi hoặc "">,"note":<chuỗi>,"date":"YYYY-MM-DD"}. '
     "CHỈ trích số tiền/ngày có trong tin nhắn, KHÔNG bịa.\n"
-    '- "question": nếu hỏi số liệu. question ∈ '
-    '["expense_month","income_month","wallet_balance"]. KHÔNG tự tính số.\n'
+    '- "question": nếu hỏi SỐ LIỆU/đánh giá của người dùng. question ∈ '
+    '["expense_month","income_month","wallet_balance","allocation_review"]. '
+    '"allocation_review" = hỏi phân bổ/ngân sách hiện tại đã hợp lý chưa. KHÔNG tự tính số.\n'
+    f'- "faq": nếu hỏi KIẾN THỨC tài chính chung (vd nên tiết kiệm %, quỹ khẩn cấp, tự do tài '
+    f"chính). faq ∈ [{_FAQ_LIST}]. CHỈ chọn id phù hợp, KHÔNG tự trả lời nội dung.\n"
+    '- "goal": nếu hỏi một MỤC TIÊU tiết kiệm có khả thi không (vd "để dành 100 triệu trong 2 '
+    'năm"). target_amount = số tiền đích (VND nguyên); months = số tháng (X năm → X×12), null nếu '
+    "không nêu. KHÔNG tự đánh giá.\n"
     '- "other": chào hỏi/không rõ. reply = câu trả lời ngắn, thân thiện bằng tiếng Việt.\n'
     "Chỉ in JSON, không kèm giải thích."
 )
@@ -85,6 +95,21 @@ def parse_llm_json(raw: str, today: date) -> dict | None:
     if kind == "question":
         intent = data.get("question")
         return {"kind": "question", "question": intent} if intent in _INTENTS else None
+    if kind == "faq":
+        faq_id = data.get("faq")
+        return {"kind": "faq", "faq": faq_id} if faq_id in FAQ_INTENTS else None
+    if kind == "goal":
+        try:
+            target = float(data.get("target_amount"))
+        except (TypeError, ValueError):
+            return None
+        if target <= 0:
+            return None
+        raw_months = data.get("months")
+        months = (
+            int(raw_months) if isinstance(raw_months, (int, float)) and raw_months > 0 else None
+        )
+        return {"kind": "goal", "target_amount": target, "months": months}
     if kind == "other":
         reply = data.get("reply")
         return {"kind": "other", "reply": reply if isinstance(reply, str) else None}

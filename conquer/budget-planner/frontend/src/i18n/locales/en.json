@@ -236,6 +236,17 @@
       "save": "Save profile",
       "saved": "Profile saved"
     },
+    "financialProfile": {
+      "title": "Financial profile",
+      "desc": "Helps the Assistant personalize advice (income, dependents…)",
+      "income": "Monthly income (₫)",
+      "occupation": "Occupation",
+      "age": "Age",
+      "location": "Location",
+      "dependents": "Dependents",
+      "save": "Save financial profile",
+      "saved": "Financial profile saved"
+    },
     "password": {
       "title": "Change password",
       "desc": "Requires your current password",
@@ -299,7 +310,7 @@
     }
   },
   "assistant": {
-    "greeting": "Hi! Add a transaction in plain words, e.g. \"lunch 50k yesterday\", or ask \"how much did I spend this month?\".",
+    "greeting": "Hi! Add a transaction in plain words (\"lunch 50k yesterday\"), ask about your numbers (\"how much did I spend this month?\"), or ask a finance question (\"how big should my emergency fund be?\").",
     "placeholder": "Type a message…",
     "send": "Send",
     "draftTitle": "Understood transaction",
@@ -309,7 +320,12 @@
     "examples": "e.g. \"coffee 35k\", \"salary 15tr yesterday\", \"wallet balance?\"",
     "q1": "How much did I spend this month?",
     "q2": "Coffee 30k",
-    "q3": "Wallet balance?"
+    "q3": "Wallet balance?",
+    "knowledgeTag": "Personal finance",
+    "faqHint": "Ask a finance question:",
+    "faq1": "What % of income should I save?",
+    "faq2": "How big should my emergency fund be?",
+    "faq3": "How much do I need for financial freedom?"
   },
   "annual": {
     "year": "Year",
@@ -358,7 +374,18 @@
     "loadError": "Could not load report",
     "vsPrev": "vs prev.",
     "byNeedLevel": "Spending by need level",
-    "exportError": "Could not export CSV"
+    "exportError": "Could not export CSV",
+    "allocationTitle": "Allocation health (50/30/20)",
+    "allocationTarget": "target {{pct}}",
+    "allocationSavings": "Savings rate {{pct}}",
+    "allocation": {
+      "verdictGood": "Healthy",
+      "verdictWarning": "Needs adjustment",
+      "verdictUnknown": "Not enough data",
+      "needs": "Needs",
+      "wants": "Wants",
+      "savings": "Savings"
+    }
   },
   "recurring": {
     "add": "Add recurring rule",
@@ -404,6 +431,13 @@
     "savedOf": "{{saved}} / {{target}} ₫",
     "deadline": "Due: {{date}}",
     "noDeadline": "No deadline",
+    "feasibility": {
+      "etaMonths": "Reach it in ~{{months}} months",
+      "onDeadline": "on track for deadline ✓",
+      "tight": "Hard to meet deadline",
+      "needPerMonth": "need ~{{need}} ₫/mo, now ~{{cap}} ₫/mo",
+      "noSurplus": "No surplus to save this month"
+    },
     "created": "Goal added",
     "updated": "Updated",
     "deleted": "Goal deleted",

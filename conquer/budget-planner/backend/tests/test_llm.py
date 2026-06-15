@@ -43,6 +43,17 @@ def test_parse_question_unknown_intent() -> None:
     assert parse_llm_json('{"kind":"question","question":"weather"}', TODAY) is None
 
 
+def test_parse_faq_valid() -> None:
+    assert parse_llm_json('{"kind":"faq","faq":"emergency_fund"}', TODAY) == {
+        "kind": "faq",
+        "faq": "emergency_fund",
+    }
+
+
+def test_parse_faq_unknown_id() -> None:
+    assert parse_llm_json('{"kind":"faq","faq":"weather"}', TODAY) is None
+
+
 def test_parse_other() -> None:
     r = parse_llm_json('{"kind":"other","reply":"Chào bạn"}', TODAY)
     assert r["kind"] == "other"
@@ -112,6 +123,18 @@ def test_llm_question_uses_db(client: TestClient, owner: dict, monkeypatch) -> N
     assert "150" in r.json()["reply"]  # số liệu tính từ DB
 
 
+def test_llm_faq_route(client: TestClient, owner: dict, monkeypatch) -> None:
+    """LLM khớp id FAQ → backend trả nội dung KB chuẩn (không lấy chữ từ LLM)."""
+    monkeypatch.setattr(llm, "llm_enabled", lambda: True)
+    monkeypatch.setattr(
+        llm, "classify_message", lambda text, today: {"kind": "faq", "faq": "emergency_fund"}
+    )
+    r = client.post("/assistant/message", json={"text": "hỏi gì đó"}, headers=owner["headers"])
+    b = r.json()
+    assert b["kind"] == "faq"
+    assert "3–6 tháng" in b["reply"]
+
+
 def test_llm_other_route(client: TestClient, owner: dict, monkeypatch) -> None:
     monkeypatch.setattr(llm, "llm_enabled", lambda: True)
     monkeypatch.setattr(
@@ -131,3 +154,85 @@ def test_llm_failure_falls_back(client: TestClient, owner: dict, monkeypatch) ->
     )
     assert r.json()["kind"] == "transaction"
     assert r.json()["draft"]["amount"] == 50000
+
+
+def test_parse_goal_valid() -> None:
+    assert parse_llm_json('{"kind":"goal","target_amount":100000000,"months":24}', TODAY) == {
+        "kind": "goal",
+        "target_amount": 100000000.0,
+        "months": 24,
+    }
+
+
+def test_parse_goal_no_months() -> None:
+    r = parse_llm_json('{"kind":"goal","target_amount":50000000,"months":null}', TODAY)
+    assert r == {"kind": "goal", "target_amount": 50000000.0, "months": None}
+
+
+def test_parse_goal_bad_amount() -> None:
+    assert parse_llm_json('{"kind":"goal","target_amount":0}', TODAY) is None
+
+
+def test_llm_goal_route(client: TestClient, owner: dict, monkeypatch) -> None:
+    """LLM trích mục tiêu → backend đánh giá khả thi từ net tháng."""
+    h = owner["headers"]
+    today = date.today().isoformat()
+    client.post(
+        "/transactions",
+        json={"amount": 10_000_000, "type": "income", "note": "l", "date": today},
+        headers=h,
+    )
+    monkeypatch.setattr(llm, "llm_enabled", lambda: True)
+    monkeypatch.setattr(
+        llm,
+        "classify_message",
+        lambda text, today2: {"kind": "goal", "target_amount": 60_000_000, "months": 12},
+    )
+    r = client.post("/assistant/message", json={"text": "xyz"}, headers=h)
+    b = r.json()
+    assert b["kind"] == "answer"
+    assert "Mục tiêu" in b["reply"]
+
+
+def test_parse_question_allocation() -> None:
+    assert parse_llm_json('{"kind":"question","question":"allocation_review"}', TODAY) == {
+        "kind": "question",
+        "question": "allocation_review",
+    }
+
+
+def test_llm_allocation_route(client: TestClient, owner: dict, monkeypatch) -> None:
+    """LLM chọn intent allocation_review → backend tính đánh giá từ DB."""
+    h = owner["headers"]
+    today = date.today()
+    client.post(
+        "/categories",
+        json={"name": "Tiền nhà", "type": "expense", "need_level": "mandatory"},
+        headers=h,
+    )
+    client.post(
+        "/transactions",
+        json={"amount": 20_000_000, "type": "income", "note": "l", "date": today.isoformat()},
+        headers=h,
+    )
+    client.post(
+        "/transactions",
+        json={
+            "amount": 9_000_000,
+            "type": "expense",
+            "note": "x",
+            "category_name": "Tiền nhà",
+            "date": today.isoformat(),
+        },
+        headers=h,
+    )
+    monkeypatch.setattr(llm, "llm_enabled", lambda: True)
+    monkeypatch.setattr(
+        llm,
+        "classify_message",
+        lambda text, today2: {"kind": "question", "question": "allocation_review"},
+    )
+    r = client.post("/assistant/message", json={"text": "abc"}, headers=h)
+    b = r.json()
+    assert b["kind"] == "answer"
+    assert "Phân bổ" in b["reply"] and "50/30/20" in b["reply"]
