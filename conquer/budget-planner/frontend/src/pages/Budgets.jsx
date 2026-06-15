@@ -3,7 +3,6 @@ import {
   Alert,
   Box,
   Button,
-  Grid,
   IconButton,
   Paper,
   Skeleton,
@@ -263,13 +262,11 @@ export default function Budgets() {
       <MonthlyPlanCard onError={setError} onSaved={setToast} />
 
       {loading ? (
-        <Grid container spacing={2.5}>
+        <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))" }}>
           {[0, 1, 2].map((i) => (
-            <Grid item xs={12} md={6} key={i}>
-              <Skeleton variant="rounded" height={150} sx={{ borderRadius: 3 }} />
-            </Grid>
+            <Skeleton key={i} variant="rounded" height={172} sx={{ borderRadius: 4 }} />
           ))}
-        </Grid>
+        </Box>
       ) : budgets.length === 0 ? (
         <Paper sx={{ p: 5, borderRadius: 3, textAlign: "center", border: (th) => `1px dashed ${th.palette.divider}` }}>
           <Typography variant="body2" sx={{ color: "text.secondary" }}>
@@ -277,18 +274,17 @@ export default function Budgets() {
           </Typography>
         </Paper>
       ) : (
-        <Grid container spacing={2.5}>
+        <Box sx={{ display: "grid", gap: 2, gridTemplateColumns: "repeat(auto-fill, minmax(320px, 1fr))" }}>
           {budgets.map((b) => (
-            <Grid item xs={12} md={6} key={b.id}>
-              <BudgetCard
-                budget={b}
-                categoryName={catNames[b.category_id]}
-                onEdit={openEdit}
-                onDelete={setConfirmTarget}
-              />
-            </Grid>
+            <BudgetCard
+              key={b.id}
+              budget={b}
+              categoryName={catNames[b.category_id]}
+              onEdit={openEdit}
+              onDelete={setConfirmTarget}
+            />
           ))}
-        </Grid>
+        </Box>
       )}
 
       <BudgetFormDialog
