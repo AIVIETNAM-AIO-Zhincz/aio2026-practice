@@ -6,7 +6,11 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/) và [SemVer](https
 ## [Unreleased]
 
 ### Added
+- W01 D02: 3 notebook demo Tabular & Time-series (`M01-python-basics/W01/02_tabular_timeseries/`).
 - Cấu hình `mypy` (kiểm type tĩnh) trong `pyproject.toml`, pre-commit và CI — enforce type hint cho `aiolib/`.
+
+### Changed
+- **Tách project Conquer** (Budget Planner + `agent-os/product` + `agent-os/specs`) sang repo riêng [`aio-conquer-2026`](https://github.com/AIVIETNAM-AIO-Zhincz/aio-conquer-2026) (giữ git history). Repo này giữ lại `agent-os/standards/` dùng chung.
 - Đo độ phủ test bằng `pytest-cov`: report `term-missing`, ngưỡng `--cov-fail-under=100` (đúng tinh thần TDD-NON-NEGOTIABLE).
 - `CHANGELOG.md` theo chuẩn Keep a Changelog.
 
