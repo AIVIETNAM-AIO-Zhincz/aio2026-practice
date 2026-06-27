@@ -1,0 +1,2 @@
+# Day 05 — demo next-token prediction (Python thuần)
+pytest   # chạy test; bản thân ngram_lm.py không cần thư viện ngoài

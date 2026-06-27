@@ -5,7 +5,10 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/) và [SemVer](https
 
 ## [Unreleased]
 
+## [0.4.0] - 2026-06-27
+
 ### Added
+- **KEEP TRACK (M01 W04)**: code thử thách Day 03–05 tại `M01-python-basics/W04/keep-track/` — image similarity (OpenCV), mô phỏng RAG, chatbot RAG hỏi đáp PDF (pypdf + ChromaDB + Ollama), demo next-token prediction n-gram. Kèm test.
 - W01 D02: 3 notebook demo Tabular & Time-series (`M01-python-basics/W01/02_tabular_timeseries/`).
 - Cấu hình `mypy` (kiểm type tĩnh) trong `pyproject.toml`, pre-commit và CI — enforce type hint cho `aiolib/`.
 
@@ -13,8 +16,6 @@ Theo [Keep a Changelog](https://keepachangelog.com/vi/1.1.0/) và [SemVer](https
 - **Tách project Conquer** (Budget Planner + `agent-os/product` + `agent-os/specs`) sang repo riêng [`aio-conquer-2026`](https://github.com/AIVIETNAM-AIO-Zhincz/aio-conquer-2026) (giữ git history). Repo này giữ lại `agent-os/standards/` dùng chung.
 - Đo độ phủ test bằng `pytest-cov`: report `term-missing`, ngưỡng `--cov-fail-under=100` (đúng tinh thần TDD-NON-NEGOTIABLE).
 - `CHANGELOG.md` theo chuẩn Keep a Changelog.
-
-### Changed
 - Bổ sung type hint cho các hàm trong `branching.py` và `loops.py` (đồng bộ chuẩn với `aiolib/`).
 
 ### Fixed

@@ -1,0 +1,5 @@
+# Day 03 — Vector Database / RAG / Image Similarity
+numpy
+opencv-python          # cv2 — đọc & xử lý ảnh
+pytest                 # chạy test
+sentence-transformers  # chỉ cần khi chạy RAG với mô hình thật
