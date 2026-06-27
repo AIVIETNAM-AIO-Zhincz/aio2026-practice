@@ -1,0 +1,10 @@
+# Day 04 — RAG Chatbot hỏi đáp PDF
+pypdf          # đọc PDF
+chromadb       # vector database
+ollama         # gọi Ollama: embedding bge-m3 + LLM vicuna
+streamlit      # giao diện web
+pytest         # chạy test
+
+# Ngoài pip: cài Ollama (ollama.com) rồi:
+#   ollama pull bge-m3
+#   ollama pull vicuna:7b-v1.5-q5_1
