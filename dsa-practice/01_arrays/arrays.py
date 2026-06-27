@@ -27,7 +27,7 @@ class DynamicArray:
         Input: value (int) — giá trị cần thêm.
         Output: không.
         """
-        raise NotImplementedError("TODO: thêm value vào cuối self._data")
+        self._data.append(value)
 
     def get(self, index: int) -> int:
         """Lấy phần tử tại vị trí index.
@@ -36,9 +36,9 @@ class DynamicArray:
         Output: int — phần tử tại index.
         Lỗi: IndexError nếu index ngoài phạm vi.
         """
-        raise NotImplementedError(
-            "TODO: trả về phần tử tại index, raise IndexError nếu ngoài phạm vi"
-        )
+        if 0 <= index < len(self._data):
+            return self._data[index]
+        raise IndexError("Index out of bounds")
 
     def pop(self) -> int:
         """Bỏ và trả về phần tử cuối cùng của mảng.
@@ -47,7 +47,9 @@ class DynamicArray:
         Output: int — phần tử cuối vừa bị bỏ.
         Lỗi: IndexError nếu mảng rỗng.
         """
-        raise NotImplementedError("TODO: bỏ và trả về phần tử cuối, raise IndexError nếu rỗng")
+        if not self._data:
+            raise IndexError("pop from empty array")
+        return self._data.pop()
 
     def __len__(self) -> int:
         """Trả về số phần tử hiện có trong mảng.
@@ -55,7 +57,7 @@ class DynamicArray:
         Input: không.
         Output: int — độ dài mảng.
         """
-        raise NotImplementedError("TODO: trả về số phần tử trong self._data")
+        return len(self._data)
 
 
 class Stack:
