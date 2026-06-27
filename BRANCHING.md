@@ -54,7 +54,9 @@ Bám cấu trúc module của repo:
 | Loại công việc | Định dạng mã | Ví dụ |
 |---|---|---|
 | Học theo buổi (`M{NN}-.../W{NN}/`) | `M{NN}-W{NN}[-{chủ_đề}]` | `M01-W01-branching`, `M01-W01-sql` |
-| Project Conquer (`conquer/`) | `CQR-{bước_pipeline}` | `CQR-ingestion`, `CQR-validation` |
+| Thư viện dùng chung (`aiolib/`) | `LIB-{chủ_đề}` | `LIB-metrics`, `LIB-activations` |
+
+> Project **Conquer** đã tách sang repo [`aio-conquer-2026`](https://github.com/AIVIETNAM-AIO-Zhincz/aio-conquer-2026) (mã `CQR-*` dùng ở repo đó).
 
 ### Đặt tên nhánh feature
 
@@ -62,7 +64,7 @@ Bám cấu trúc module của repo:
 feature/{MÃ}-{slug-ngắn}
 ```
 
-- `feature/M01-W01-branching` · `feature/M01-W01-newton-sqrt` · `feature/CQR-ingestion`
+- `feature/M01-W01-branching` · `feature/M01-W01-newton-sqrt` · `feature/LIB-metrics`
 - Một nhánh = một ticket. Không gộp nhiều mã khác nhau vào một `feature/*`.
 
 ### Commit phải tham chiếu mã

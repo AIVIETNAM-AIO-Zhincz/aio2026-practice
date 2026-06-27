@@ -4,9 +4,11 @@ Hướng dẫn cho Claude Code khi làm việc trong repo này.
 
 ## Dự án
 
-Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and Data Science) và project **AIO Conquer 2026**. Chủ repo giữ vai trò **Tech Leader** (trưởng nhóm kỹ thuật) trong team Conquer — điều phối, rã task, theo dõi tiến độ và merge output của nhóm.
+Repo thực hành khoá **AI Việt Nam — AIO 2026** (Basic Python for AI and Data Science) — chứa **code thực hành theo từng buổi học**.
 
-Notes lý thuyết nằm ở Obsidian vault (ngoài repo); repo này chứa **code thực hành** theo từng buổi học.
+Notes lý thuyết nằm ở Obsidian vault (ngoài repo).
+
+> Project **AIO Conquer 2026** (Budget Planner + Agent OS specs) đã tách sang repo riêng: `aio-conquer-2026` (https://github.com/AIVIETNAM-AIO-Zhincz/aio-conquer-2026).
 
 ## Cấu trúc
 
@@ -15,7 +17,7 @@ M01-python-basics/W01/   # Module 1 - mỗi thư mục con là 1 buổi
 ├── 03_branching/        # if-elif-else, ReLU, chatbot   (.py + .ipynb)
 ├── 04_basic_sql/        # SQL: sqlite cho Colab + .sql gốc PostgreSQL
 └── 05_string_loops/     # for/while, Pi/e, Newton sqrt  (.py + .ipynb)
-conquer/                 # project AIO Conquer (pipeline AI/ML)
+agent-os/standards/      # coding standards dùng chung (Agent OS)
 ```
 
 Đặt code buổi mới theo mẫu: `M{NN}-.../W{NN}/{thứ tự}_{chủ đề}/`.
